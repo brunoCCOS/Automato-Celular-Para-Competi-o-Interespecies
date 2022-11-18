@@ -1,14 +1,16 @@
 import numpy as np
 
 class Especies:
-    
+
+    count = 1
     conflict_matrix = None
     
     def __init__(self,sigma):
         self.B = np.random.normal(loc=0.1,scale=sigma)
         self.D = np.random.normal(loc=0.05,scale=sigma)
         self.I = np.random.normal(loc=0.25,scale=sigma)
-    
+        self.id = Especies.count
+        Especies.count+=1
     def initialize_matrix(M):
         '''
         Initialize static matrix conflict_matrix with MxM entries from random samples betwen (0,1)
