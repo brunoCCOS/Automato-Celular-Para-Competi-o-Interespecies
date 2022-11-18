@@ -1,6 +1,6 @@
 # Automato-Celular-Para-Competi-o-Interespecies
 
-![plot](img\image-20221118131622173.png)
+![alt text](https://github.com/brunoCCOS/Automato-Celular-Para-Competi-o-Interespecies/blob/main/img/image-20221118131627290.png?raw=true)
 
 ![image-20221118131627290](img\image-20221118131627290.png)
 
