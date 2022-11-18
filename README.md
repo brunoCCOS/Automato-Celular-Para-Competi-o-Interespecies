@@ -1,6 +1,6 @@
 # Automato-Celular-Para-Competi-o-Interespecies
 
-![image-20221118131622173](img\image-20221118131622173.png)
+![plot](img\image-20221118131622173.png)
 
 ![image-20221118131627290](img\image-20221118131627290.png)
 
