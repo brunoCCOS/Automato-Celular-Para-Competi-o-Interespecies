@@ -1,31 +1,37 @@
 import numpy as np
+from scipy.stats import truncnorm
 
-class Especies:
+def get_truncated_normal(mean=0, sd=1, low=0, upp=10):
+    return truncnorm(
+        (low - mean) / sd, (upp - mean) / sd, loc=mean, scale=sd)
+
+
+class Species:
 
     count = 1
     conflict_matrix = None
     
     def __init__(self,sigma):
-        self.B = np.random.normal(loc=0.1,scale=sigma)
-        self.D = np.random.normal(loc=0.05,scale=sigma)
-        self.I = np.random.normal(loc=0.25,scale=sigma)
-        self.id = Especies.count
-        Especies.count+=1
+        self.E = np.random.normal(loc=0.25,scale=sigma)
+        self.D = np.random.normal(loc=0.1,scale=sigma)
+        self.id = Species.count
+        Species.count+=1
+
     def initialize_matrix(M):
         '''
         Initialize static matrix conflict_matrix with MxM entries from random samples betwen (0,1)
         args:
-            - M(required) : Number of especies to be accounted in conflict matrix
+            - M(required) : Number of species to be accounted in conflict matrix
         '''
         #Random sample probabilities
-        samples = np.uniform(low = 0., high = 1., size = (M,M))
+        samples = np.random.uniform(low = 0., high = 1., size = (M,M))
         #Generate random matrix MxM with numbers betwen (0,1)
-        Especies.conflict_matrix =  np.full((M,M),samples)
+        Species.conflict_matrix =  np.full((M,M),samples)
         #Iterate matrix and compensate to make opposite sides sums 1 and diagonals entries to be 1 either
         for row in range(M):
             for i in range(M):
                 if row == i:
-                    Especies.conflict_matrix[i][i] = 1 # Initialize diagonals with 1
+                    Species.conflict_matrix[i][i] = 0.5 # Initialize diagonals with 1
                     break #Exit of that line
                 else: 
-                    Especies.conflict_matrix[row][i]=1 - Especies.conflict_matrix[i][row] # Calculates the complement of the probability in the upper part
+                    Species.conflict_matrix[row][i] = 1 - Species.conflict_matrix[i][row] # Calculates the complement of the probability in the upper part
