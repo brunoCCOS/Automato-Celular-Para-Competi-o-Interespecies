@@ -34,7 +34,13 @@ class Grid:
         novo = self.table.copy()#Copy original grid
         for i in range(self.M):
             for j in range(self.M):
+                old = novo[i, j]
                 novo[i, j] = competing_func(self.table,(i,j),species)
+                if old != novo[i, j] :
+                    if old != 0:
+                        species[old-1].death_individual()
+                    if novo[i, j] != 0:
+                        species[novo[i, j]-1].grow_individual()
         # print(novo)
         self.table[:][:] = novo[:][:] #Updates original grid to point to the new one
         return self.table

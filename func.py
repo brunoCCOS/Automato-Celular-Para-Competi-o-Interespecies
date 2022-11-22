@@ -92,6 +92,7 @@ def g(grid:np.array ,pos: tuple,species: list):
     outputs:
         compete_state: the class that end-up in that square
     '''
-    grid[pos[0],pos[1]] = d(grid[pos[0],pos[1]],species)
+    previous = grid[pos[0],pos[1]]
+    grid[pos[0],pos[1]] = d(previous,species)
     compete_state = e(grid,pos,species)
     return compete_state

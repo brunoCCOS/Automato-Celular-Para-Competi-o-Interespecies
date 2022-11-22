@@ -8,6 +8,7 @@ def get_truncated_normal(mean=0, sd=1, low=0, upp=10):
 
 class Species:
 
+    
     count = 1
     conflict_matrix = None
     
@@ -15,8 +16,19 @@ class Species:
         self.E = np.random.normal(loc=0.25,scale=sigma)
         self.D = np.random.normal(loc=0.1,scale=sigma)
         self.id = Species.count
+        self.historical_individual = list()
+        self.individuals = 0
         Species.count+=1
 
+    def grow_individual(self):
+        self.individuals += 1
+
+    def death_individual(self):
+        self.individuals -= 1
+
+    def add_timestamp(self):
+        self.historical_individual.append(self.individuals)
+        
     def initialize_matrix(M):
         '''
         Initialize static matrix conflict_matrix with MxM entries from random samples betwen (0,1)
