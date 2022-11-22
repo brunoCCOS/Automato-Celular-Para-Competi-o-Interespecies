@@ -1,4 +1,3 @@
-
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import numpy as np
@@ -30,17 +29,20 @@ class Grid:
             self.table[pixel][0] = arrival_func(self.table[0][pixel],species,lamb)#Applies arrival func in left part of the grid
             self.table[self.M-1][pixel] = arrival_func(self.table[0][pixel],species,lamb)#Applies arrival func in right part of the grid
             self.table[pixel][self.M-1] = arrival_func(self.table[0][pixel],species,lamb)#Applies arrival func in bottom part of the grid
+        
         #Applies competing func to every square
         novo = self.table.copy()#Copy original grid
         for i in range(self.M):
             for j in range(self.M):
                 old = novo[i, j]
                 novo[i, j] = competing_func(self.table,(i,j),species)
-                if old != novo[i, j] :
-                    if old != 0:
-                        species[old-1].death_individual()
-                    if novo[i, j] != 0:
-                        species[novo[i, j]-1].grow_individual()
-        # print(novo)
+        
         self.table[:][:] = novo[:][:] #Updates original grid to point to the new one
+        
+        #Update Individuals values
+        for i in range(self.M):
+            for j in range(self.M):
+                species[self.table[i, j] - 1].individuals += 1
+
+    
         return self.table
