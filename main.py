@@ -16,7 +16,7 @@ LAMB = 20
 SIGMA = 0.05
 LOAD_STATE = False#If true load serialized objects from previous sim
 SAVE_STATE = False#If true serialize objects in the for post sims
-SAVE_IMAGE = True#If true animation will not be displayed, only the final frames the it will need to be closed
+SAVE_IMAGE = False#If true animation will not be displayed, only the final frames the it will need to be closed
 GRID_SEARCH = False# If true will run for all combinations betwen params below, if false, only runs for default values
 
 #Grid of hyper params
