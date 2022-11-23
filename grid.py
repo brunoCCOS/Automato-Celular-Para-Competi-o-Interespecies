@@ -21,7 +21,7 @@ class Grid:
         '''
         Updates grid's pixels values by computing competing and arrival functions
         '''
-        
+        old = self.table.copy()
         #Aplies arrival_func
         for pixel in range(self.M):
             #Checks if pixel is not already populated since arrival func is only applied in empty squares
@@ -31,10 +31,10 @@ class Grid:
             self.table[pixel][self.M-1] = arrival_func(self.table[0][pixel],species,lamb)#Applies arrival func in bottom part of the grid
         
         #Applies competing func to every square
+
         novo = self.table.copy()#Copy original grid
         for i in range(self.M):
             for j in range(self.M):
-                old = novo[i, j]
                 novo[i, j] = competing_func(self.table,(i,j),species)
         
         self.table[:][:] = novo[:][:] #Updates original grid to point to the new one
@@ -42,7 +42,9 @@ class Grid:
         #Update Individuals values
         for i in range(self.M):
             for j in range(self.M):
-                if self.table[i, j] != 0:
+                if self.table[i, j] != 0 and self.table[i, j] != old[i, j]:
+                    if old[i,j] != 0:
+                        species[old[i,j] - 1].individuals -= 1
                     species[self.table[i, j] - 1].individuals += 1
 
         return self.table
