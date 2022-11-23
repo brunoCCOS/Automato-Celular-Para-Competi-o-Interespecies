@@ -42,7 +42,7 @@ class Grid:
         #Update Individuals values
         for i in range(self.M):
             for j in range(self.M):
-                species[self.table[i, j] - 1].individuals += 1
+                if self.table[i, j] != 0:
+                    species[self.table[i, j] - 1].individuals += 1
 
-    
         return self.table

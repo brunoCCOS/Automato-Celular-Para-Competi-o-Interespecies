@@ -1,7 +1,7 @@
 import numpy as np
 
 def truncated_normal(mean=0, sd=1, low=0, upp=1):
-    sample = np.random.normal(loc=0.25,scale=sd)
+    sample = np.random.normal(loc=mean,scale=sd)
     if sample < 0:
         sample = 0.000001
     elif sample >1:
@@ -16,7 +16,7 @@ class Species:
     
     def __init__(self,sigma):
         self.E = truncated_normal(mean=0.25,sd=sigma)
-        self.D = truncated_normal(mean=0.1,sd=sigma)
+        self.D = truncated_normal(mean=0.15,sd=sigma)
         self.id = Species.count
         self.historical_individual = list()
         self.individuals = 0
