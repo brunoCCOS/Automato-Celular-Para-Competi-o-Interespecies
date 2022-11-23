@@ -1,9 +1,12 @@
 import numpy as np
-from scipy.stats import truncnorm
 
-def get_truncated_normal(mean=0, sd=1, low=0, upp=10):
-    return truncnorm(
-        (low - mean) / sd, (upp - mean) / sd, loc=mean, scale=sd)
+def truncated_normal(mean=0, sd=1, low=0, upp=1):
+    sample = np.random.normal(loc=0.25,scale=sd)
+    if sample < 0:
+        sample = 0.000001
+    elif sample >1:
+        sample = .9999999
+    return sample
 
 class Species:
 
@@ -12,8 +15,8 @@ class Species:
     conflict_matrix = None
     
     def __init__(self,sigma):
-        self.E = np.random.normal(loc=0.25,scale=sigma)
-        self.D = np.random.normal(loc=0.1,scale=sigma)
+        self.E = truncated_normal(mean=0.25,sd=sigma)
+        self.D = truncated_normal(mean=0.1,sd=sigma)
         self.id = Species.count
         self.historical_individual = list()
         self.individuals = 0
